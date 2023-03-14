@@ -1,0 +1,130 @@
+<div class="sidebar">
+    <div class="logo_content">
+        <div class="logo text-center text-light mt-4">
+            <img src="assets/images/hcs_logo.png" height="120px;">
+        </div>
+        <i class='bi bi-justify' id="btn"></i>
+    </div>
+    <hr>
+    <ul class="nav_list">
+        <li>
+            <div class="icon-link" routerLink="/dashboard/home" routerLinkActive="active">
+                <label>
+                    <i class="bi bi-pc-display-horizontal"></i>
+                    <span class="links_name">Dashboard</span>
+                </label>
+            </div>
+        </li>
+        <li *ngIf="role === 2">
+            <div class="icon-link" routerLink="/dashboard/property" routerLinkActive="active">
+                <label>
+                    <i class="bi bi-pc-display-horizontal"></i>
+                    <span class="links_name">Property Master</span>
+                </label>
+            </div>
+        </li>
+        <li *ngIf="role === 2">
+            <div class="icon-link" routerLink="/dashboard/room-category" routerLinkActive="active">
+                <label>
+                    <i class="bi bi-pc-display-horizontal"></i>
+                    <span class="links_name">Room Category Master</span>
+                </label>
+            </div>
+        </li>
+        <li *ngIf="role === 2">
+            <div class="icon-link" routerLink="/dashboard/room" routerLinkActive="active">
+                <label>
+                    <i class="bi bi-pc-display-horizontal"></i>
+                    <span class="links_name">Room Master</span>
+                </label>
+            </div>
+        </li>
+        <li *ngIf="role === 2">
+            <div class="icon-link" routerLink="/dashboard/users" routerLinkActive="active"> 
+                <label>
+                    <i class="bi bi-pc-display-horizontal"></i>
+                    <span class="links_name">User Master</span>
+                </label>
+            </div>
+        </li>
+        <li *ngIf="role === 2">
+            <div class="icon-link" routerLink="/dashboard/room-rate" routerLinkActive="active">
+                <label>
+                    <i class="bi bi-pc-display-horizontal"></i>
+                    <span class="links_name">Room Rate</span>
+                </label>
+            </div>
+        </li>
+        <li *ngIf="role === 2">
+            <div class="icon-link" routerLink="/dashboard/reservation" routerLinkActive="active">
+                <label>
+                    <i class="bi bi-pc-display-horizontal"></i>
+                    <span class="links_name">Reservation</span>
+                </label>
+            </div>
+        </li>
+        <li *ngIf="role === 3">
+            <div class="icon-link" routerLink="/dashboard/check-in" routerLinkActive="active">
+                <label>
+                    <i class="bi bi-pc-display-horizontal"></i>
+                    <span class="links_name">Check-In</span>
+                </label>
+            </div>
+        </li>
+        <li *ngIf="role === 3">
+            <div class="icon-link" routerLink="/dashboard/check-out" routerLinkActive="active">
+                <label>
+                    <i class="bi bi-pc-display-horizontal"></i>
+                    <span class="links_name">Check-Out</span>
+                </label>
+            </div>
+        </li>
+        <li *ngIf="role === 3">
+            <div class="icon-link" routerLink="/dashboard/other-service" routerLinkActive="active">
+                <label>
+                    <i class="bi bi-pc-display-horizontal"></i>
+                    <span class="links_name">Other Services</span>
+                </label>
+            </div>
+        </li>
+        <li *ngIf="role === 3">
+            <div class="icon-link" routerLink="/dashboard/bill" routerLinkActive="active">
+                <label>
+                    <i class="bi bi-pc-display-horizontal"></i>
+                    <span class="links_name">Billing</span>
+                </label>
+            </div>
+        </li>
+        <!-- <li class="parent" [hidden]="group === 2 || group === 3 || group === 4">
+            <div class="icon-link">
+                <label class="arrow">
+                    <i class="bi bi-briefcase"></i>
+                    <span class="links_name" style="cursor: pointer">Masters</span>
+                </label>
+                <i class="bi bi-arrow-down-short arrow"></i>
+            </div>
+            <ul class="sub-menu">
+                <li><span class="links_name" style="color: white">Masters</span></li>
+                <li><a href="/complex">Complex Master</a></li>
+                <li><a href="/department">Department Master</a></li>
+                <li><a href="/designation">Designation Master</a></li>
+                <li><a href="/document">Document Type Master</a></li>
+            </ul>
+        </li>
+        <li class="parent" [hidden]="group === 2 || group === 3 || group === 4">
+            <div class="icon-link">
+                <label>
+                    <i class="bi bi-person-badge"></i>
+                    <span class="links_name" style="cursor: pointer">Employee</span>
+                </label>
+                <i class="bi bi-arrow-down-short arrow"></i>
+            </div>
+            <ul class="sub-menu">
+                <li><span class="links_name" style="color: white">Employee</span></li>
+                <li><a href="/employee">Employee Master</a></li>
+                <li><a href="/designation-allocation">Designation Allocation</a></li>
+                <li><a href="/duty-allocation">Duty Allocation</a></li>
+            </ul>
+        </li> -->
+    </ul>
+</div>

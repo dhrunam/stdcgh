@@ -1,0 +1,59 @@
+<div class="px-5 py-2">
+    <h3 *ngIf="!editMode; else alt">Add Room</h3>
+    <ng-template #alt>
+        <h3>Edit Room</h3>
+    </ng-template>
+    <hr>
+    <form #room="ngForm" (ngSubmit)="!editMode ? onAddRoom(room) : onUpdateRoom(room)">
+        <div class="row">
+            <div class="col-md-3">
+                <label class="form-label">Room Number<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="room_no" name="no" #no="ngModel" required>
+                <span class="text-danger" *ngIf="no.invalid && no.touched">Please enter room no.</span>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Occupancy<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="occupancy" name="occ" #occ="ngModel" required>
+                <span class="text-danger" *ngIf="occ.invalid && occ.touched">Please enter occupancy</span>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Guest House<span class="text-danger">*</span></label>
+                <select class="form-select" [(ngModel)]="property_id" id="prop_id" name="prop_id" #prop_id="ngModel" required>
+                    <option [value]="'N/A'">---Select Guest House---</option>
+                    <option *ngFor="let p of properties" [value]="p.id">{{p.name}}</option>
+                </select>
+                <!-- <span class="text-danger" *ngIf="property_id === 'N/A'">Please select a property</span> -->
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Room Category<span class="text-danger">*</span></label>
+                <select class="form-select" [(ngModel)]="room_category_id" id="cat_id" name="cat_id" #cat_id="ngModel" required>
+                    <option [value]="'N/A'">---Select Room Category---</option>
+                    <option *ngFor="let c of categories" [value]="c.id">{{c.name}}</option>
+                </select>
+                <!-- <span class="text-danger" *ngIf="cat_id.invalid && cat_id.touched">Please select a room category</span> -->
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <label class="form-label">Description</label>
+                <textarea class="form-control" rows="5" cols="10" [(ngModel)]="description" name="description"></textarea>
+            </div>
+        </div>
+        <div class="alert alert-success mt-3" *ngIf="showSuccess === 'true'">
+            <span *ngIf="!editMode; else err">Room Added Successfully !!</span>
+            <ng-template #err>
+                <span>Room Updated Successfully !!</span>
+            </ng-template>
+        </div>
+        <div class="alert alert-danger mt-3" *ngIf="showSuccess === 'false'">
+            Error !!
+        </div>
+        <div class="d-flex justify-content-center align-items-center mt-4">
+            <button class="btn btn-primary" (click)="onGoBack()" type="button">Go Back</button>
+            <button class="btn btn-primary ms-3" *ngIf="!editMode; else update" type="submit">Submit</button>
+            <ng-template #update>
+                <button class="btn btn-primary ms-3" type="submit">Update</button>
+            </ng-template>
+        </div>
+    </form>
+</div>

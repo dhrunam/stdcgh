@@ -1,0 +1,25 @@
+
+<div class="px-5 py-2">
+    <div class="text-end">
+        <button class="btn btn-primary" (click)="onRouteAddRoomCategory()">+ Add Room Category</button>
+    </div>
+    <div class="err text-center mt-3" *ngIf="!categories[0]">
+        <h4>No Room Categories Found</h4>
+    </div>
+    <table class="table table-bordered mt-3" *ngIf="categories[0]">
+        <thead>
+            <tr>
+                <th scope="col">S.No.</th>
+                <th scope="col">Category</th>
+                <th scope="col" class="text-center">Operations</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let c of categories; let i=index">
+                <td width="4%" class="text-center">{{i+1}}</td>
+                <td>{{c.name}}</td>
+                <td width="10%" class="text-center"><i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit" (click)="onRouteEditRoomCategory(c.id)"></i> / <i class="bi bi-trash3"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete" (click)="onDeleteRoomCategory(c.id)"></i></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

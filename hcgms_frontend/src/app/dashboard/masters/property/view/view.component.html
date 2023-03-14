@@ -1,0 +1,34 @@
+
+<div class="px-5 py-2">
+    <div class="text-end">
+        <button class="btn btn-primary" (click)="onRouteAddProperty()">+ Add Property</button>
+    </div>
+    <div class="err text-center mt-3" *ngIf="!properties[0]">
+        <h4>No Properties Found</h4>
+    </div>
+    <table class="table table-bordered mt-3" *ngIf="properties[0]">
+        <thead>
+            <tr>
+                <th scope="col">S.No.</th>
+                <th scope="col">Name</th>
+                <th scope="col">Short Name</th>
+                <th scope="col">Address</th>
+                <th scope="col" width="7%">isDeleted ?</th>
+                <th scope="col" class="text-center">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of properties; let i=index">
+                <td width="4%" class="text-center">{{i+1}}</td>
+                <td>{{p.name}}</td>
+                <td>{{p.short_name}}</td>
+                <td>{{p.address}}</td>
+                <td class="text-center">
+                    <input type="checkbox" checked (click)="onDeleteProperty(p.id, true)" *ngIf="!p.is_operational">
+                    <input type="checkbox" (click)="onDeleteProperty(p.id, false)" *ngIf="p.is_operational">
+                </td>
+                <td width="10%" class="text-center"><i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit" (click)="onRouteEditProperty(p.id)"></i></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

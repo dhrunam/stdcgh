@@ -1,0 +1,128 @@
+
+<section class="px-5 py-2 mt-5">
+    <div class="d-flex justify-content-between">
+        <h5>List of Booking</h5>
+        <h5>Date: {{ todayDate | date: 'dd-MM-YYYY' }}</h5>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-3" *ngFor="let c of reservation_data">
+            <div class="card" data-bs-toggle="modal" data-bs-target="#viewModal" (click)="onGetOtherServices(c.id,c.reservation_no,c.related_services)">
+                <div class="card-body">
+                    <h5 class="card-title">Booking ID: {{ c.reservation_no }}</h5>
+                    <h6 class="card-subtitle mt-3 mb-2 text-muted">Guest Name: {{ c.lead_guest_name }}</h6>
+                    <h6 class="card-subtitle mt-3 mb-2 text-muted">Contact Number: {{ c.contact_no }}</h6>
+                    <h6 class="card-subtitle mt-3 mb-2 text-muted">Room(s) Booked: 
+                        <label *ngFor="let r of c.reservation_room_details">{{r.related_room.room_no}}</label>
+                    </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="viewModalLabel">Booking ID: {{ reservation_no }}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th width="5%" scope="col">S.No.</th>
+                        <th class="text-center" scope="col">Particular</th>
+                        <th class="text-center"  scope="col">Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center" *ngFor="let r of other_services; let i=index">
+                        <td>{{i+1}}</td>
+                        <td class="text-left">{{r.particular}}</td>
+                        <td class="text-end">{{r.cost}}</td>
+                    </tr>
+                    <tr class="text-center">
+                        <td></td>
+                        <td class="text-end">Total cost</td>
+                        <td class="text-end">{{total_cost.toFixed(2)}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-dismiss="modal">+Add</button>
+
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="editModalLabel">Booking ID: {{ reservation_no }}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            <form [formGroup]="entryForm" (ngSubmit)="onSubmit()" >
+                <div class="row">
+                    <div class="col-md-4">
+                        <input type="hidden" class="form-control" id="id" name="id" formControlName="id" required>
+                        <label class="form-label">Particular<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="particular" name="particular" formControlName="particular" required>
+                        <!-- <small class="text-danger" *ngIf="name.touched && name.invalid">Please enter name</small> -->
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Total Cost<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" maxlength="10" minlength="1" id='cost' name="cost" formControlName="cost" required>
+                        <!-- <div *ngIf="short_name.touched && short_name.invalid">
+                            <small class="text-danger" *ngIf="short_name.errors!['required']">Please enter name</small>
+                            <small class="text-danger" *ngIf="short_name.errors!['minlength']">Short name must be of 4 characters</small>
+                        </div> -->
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+
+                        <label class="form-label">From<span class="text-danger">*</span></label>
+                        <input type="date" class="form-control" id="start_date" name="start_date" formControlName="start_date" required>
+                        <!-- <small class="text-danger" *ngIf="name.touched && name.invalid">Please enter name</small> -->
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">To<span class="text-danger">*</span></label>
+                        <input type="date" class="form-control"  id='end_date' name="end_date" formControlName="end_date" required>
+                        <!-- <div *ngIf="short_name.touched && short_name.invalid">
+                            <small class="text-danger" *ngIf="short_name.errors!['required']">Please enter name</small>
+                            <small class="text-danger" *ngIf="short_name.errors!['minlength']">Short name must be of 4 characters</small>
+                        </div> -->
+                    </div>
+
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <label class="form-label">Remarks</label>
+                        <textarea rows="5" cols="10" class="form-control" id="remarks" name="remarks" formControlName="remarks"></textarea>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center align-items-center mt-4">
+                    <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewModal" data-bs-dismiss="modal">Save</button>
+
+                </div>
+            </form> 
+        </div>
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+</div>

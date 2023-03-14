@@ -1,0 +1,29 @@
+<section *ngIf="listRooms" class="mt-4">
+    <div class="list-houses">
+        <h4>Room(s)</h4>
+        <hr>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col" width="5%">Select</th>
+                    <th scope="col" width="5%">S.No.</th>
+                    <th scope="col">Room No</th>
+                    <th scope="col">Room Type</th>
+                    <th scope="col">Room Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let room of results[0].rooms; let i=index">
+                    <td scope="col" class="text-center"><input type="checkbox" (change)="onStatusCheck($event, room.id, i, room.cost)"></td>
+                    <td scope="col" class="text-center">{{i+1}}</td>
+                    <td scope="col">{{ room.room }}</td>
+                    <td scope="col">{{ room.room_category_name }}</td>
+                    <td scope="col">₹ {{ room.cost }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-end mt-4 mb-3">
+            <button class="btn btn-primary" (click)="onEnterBookingDetails()">Next <i class="bi bi-arrow-right-circle"></i></button>
+        </div>
+    </div>
+</section>

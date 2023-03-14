@@ -1,0 +1,98 @@
+.sidebar{
+    position:sticky;
+    top:0;
+    left:0;
+    background: #fff;
+    min-height: 906px;
+    height:100%;
+    width: 280px;
+    padding: 6px 0;
+    transition: all 0.4s ease;
+}
+.sidebar.closed{
+    width: 78px;
+}
+.sidebar .logo_content .logo img{
+    opacity: 1;
+    pointer-events: none;
+}
+.sidebar.closed .logo_content .logo img{
+    opacity: 0;
+    pointer-events: none;
+    height: 20px;
+    width: 50px;
+}
+.sidebar #btn{
+    color: #579FDD;
+    position: absolute;
+    top:3px;
+    left: 90%;
+    line-height: 50px;
+    font-size: 35px;
+    width:50px;
+    height: 50px;
+    text-align: center;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+.sidebar.closed #btn{
+    left: 50%;
+}
+.sidebar .nav_list{
+    overflow: auto;
+}
+.sidebar.closed .nav_list{
+    overflow: visible;
+}
+.sidebar .nav_list li{
+    margin-left: -30px;
+    position: relative;
+    list-style: none;
+    transition: all .4s ease;
+}
+.sidebar .nav_list li .icon-link{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.sidebar.closed .nav_list li .icon-link{
+    display: block;
+}
+.sidebar .nav_list li i{
+    height: 50px;
+    min-width: 78px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+/* .sidebar .nav_list li.showMenu i.arrow{
+    transform: rotate(-180deg);
+}
+.sidebar.closed .nav_list i.arrow{
+    display: none;
+} */
+.sidebar .nav_list li label{
+    display:flex;
+    text-decoration: none;
+    align-items: center;
+    cursor: pointer;
+}
+.sidebar .nav_list li label .links_name{
+    font-size: 18px;
+    font-weight: 400;
+}
+.sidebar.closed .nav_list label .links_name{
+    opacity: 0;
+    pointer-events: none;
+}
+.active{
+    background-color: #579FDD;
+    border-radius: 0 20px 20px 0;
+}
+.active i,
+.active span{
+    color: white;
+}
+

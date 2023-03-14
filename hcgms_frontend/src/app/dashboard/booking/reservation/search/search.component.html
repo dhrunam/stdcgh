@@ -1,0 +1,24 @@
+<form (ngSubmit)="onSearchRooms(search)" #search="ngForm">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-3">
+            <label class="form-label">Guest House<span class="text-danger">*</span></label>
+            <select class="form-select" [(ngModel)]="property" name="property_id" #property_id="ngModel">
+                <option [value]="'N/A'">---Select Guest House---</option>
+                <option *ngFor="let p of properties" [value]="p.id">{{ p.name }}</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Start Date<span class="text-danger">*</span></label>
+            <input type="date" class="form-control" ngModel name="start_date" #start_date="ngModel" required>
+            <small class="text-danger" *ngIf="start_date.touched && start_date.invalid">Please select a start date</small>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">End Date<span class="text-danger">*</span></label>
+            <input type="date" class="form-control" ngModel name="end_date" #end_date="ngModel" required>
+            <small class="text-danger" *ngIf="end_date.touched && end_date.invalid">Please select a start date</small>
+        </div>
+        <div class="col-md-1">
+             <button class="btn btn-primary" style="margin-top: 31px;" type="submit">Search</button>
+         </div>
+    </div>
+</form>

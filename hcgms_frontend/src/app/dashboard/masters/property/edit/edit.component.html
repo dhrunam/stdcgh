@@ -1,0 +1,58 @@
+<div class="form px-5 py-2">
+    <h3 *ngIf="!editMode;else edit">Add Property</h3>
+    <ng-template #edit>
+        <h3>Edit Property</h3>
+    </ng-template>
+    <hr>
+    <form #property="ngForm" (ngSubmit)="editMode ? onUpdateProperty(property) : onAddProperty(property)">
+        <div class="row">
+            <div class="col-md-4">
+                <label class="form-label">Property Name<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="prop_name" name="name" #name="ngModel" required>
+                <small class="text-danger" *ngIf="name.touched && name.invalid">Please enter name</small>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Short Name<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" maxlength="4" minlength="4" [(ngModel)]="prop_short_name" name="short_name" #short_name="ngModel" required>
+                <div *ngIf="short_name.touched && short_name.invalid">
+                    <small class="text-danger" *ngIf="short_name.errors!['required']">Please enter name</small>
+                    <small class="text-danger" *ngIf="short_name.errors!['minlength']">Short name must be of 4 characters</small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Property Code<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="prop_code" name="code" #code="ngModel" required>
+                <small class="text-danger" *ngIf="code.touched && code.invalid">Please enter name</small>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <label class="form-label">Address<span class="text-danger">*</span></label>
+                <textarea rows="5" cols="10" class="form-control" [(ngModel)]="prop_address" name="address" #address="ngModel" required></textarea>
+                <small class="text-danger" *ngIf="address.touched && address.invalid">Please enter address</small>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <label class="form-label">Description</label>
+                <textarea rows="5" cols="10" class="form-control" [(ngModel)]="prop_description" name="description" #description="ngModel"></textarea>
+            </div>
+        </div>
+        <div class="alert alert-success mt-3" *ngIf="showSuccess === 'true'">
+            <span *ngIf="!editMode; else add">Property Added Successfully !!</span>
+            <ng-template #add>
+                <span>Property Updated Successfully !!</span>
+            </ng-template>
+        </div>
+        <div class="alert alert-danger mt-3" *ngIf="showSuccess === 'false'">
+            Error !!!
+        </div>
+        <div class="d-flex justify-content-center align-items-center mt-4">
+            <button class="btn btn-primary" type="button" (click)="onGoBack()">Go Back</button>
+            <button class="btn btn-primary ms-3" type="submit" *ngIf="!editMode; else update">Submit</button>
+            <ng-template #update>
+                <button class="btn btn-primary ms-3" type="submit">Update</button>
+            </ng-template>
+        </div>
+    </form> 
+</div>
