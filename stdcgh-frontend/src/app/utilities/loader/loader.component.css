@@ -1,0 +1,15 @@
+.spinner-wrapper{
+    position: absolute;
+    width: 85%;
+    height: 50%;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+}
+.spinner-border{
+    color: #2a981c;
+    height: 3rem;
+    width: 3rem;
+}
