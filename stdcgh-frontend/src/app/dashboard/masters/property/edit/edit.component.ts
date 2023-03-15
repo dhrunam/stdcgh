@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Observable, take} from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { PropertyService } from '../property.service';
 @Component({
   selector: 'app-edit',
@@ -8,6 +9,7 @@ import { PropertyService } from '../property.service';
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent {
+  private subscription!: Subscription;
   showLoader: boolean = false;
   editMode: boolean = false;
   id:number = 0;
@@ -38,7 +40,8 @@ export class EditComponent {
     })
     
   }
-  onSubmit(data:any){
+  onSubmit(data:NgForm){
+    this.status = '';
     let observable: Observable<any>;
     if(!data.valid){
       data.control.markAllAsTouched();
@@ -59,13 +62,25 @@ export class EditComponent {
         fd.append('is_operational', 'true');
         observable = this.propertyService.add_property(fd);
       }
-      observable.pipe(take(1)).subscribe({
-        next: data => this.status = 'success',
-        error: err => this.status = err,
+      this.subscription = observable.subscribe({
+        next: data => {
+          this.status = 'success';
+          this.showLoader = false;
+        },
+        error: err => {
+          this.showLoader = false;
+          this.status = err;
+        }
       })
     }
+    data.reset();
   }
   onGoBack(){
     this.editMode ? this.router.navigate(['../../'], {relativeTo: this.route}) : this.router.navigate(['../'], {relativeTo: this.route});
+  }
+  ngOnDestroy():void{
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    }
   }
 }

@@ -28,7 +28,7 @@ export class LoginComponent {
         next: data => {
           this.router.navigate(['/dashboard'], { relativeTo: this.route } );
         },
-        error: err => { this.error = err },
+        error: err => { this.error = err; console.log(err) },
       });
       data.reset();
     }

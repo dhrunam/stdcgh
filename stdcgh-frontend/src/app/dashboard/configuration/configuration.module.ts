@@ -5,7 +5,7 @@ import { TaxModule } from "./tax/tax.module";
 
 const routes: Routes = [
     { path: 'tax', loadChildren: () => import('./tax/tax.module').then(m => m.TaxModule)},
-    { path: 'room', loadChildren: () => import('./tariff/tariff.module').then(m => m.TariffModule) },
+    { path: 'tariff', loadChildren: () => import('./tariff/tariff.module').then(m => m.TariffModule) },
 ]
 
 @NgModule({

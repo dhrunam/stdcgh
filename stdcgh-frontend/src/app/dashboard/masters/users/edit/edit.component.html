@@ -1,0 +1,114 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<div class="form px-5 py-2" *ngIf="!showLoader">
+    <h3>{{editMode ? 'Edit User' : 'Add User'}}</h3>
+    <hr>  
+    <form #user="ngForm" (ngSubmit)="onSubmit(user)">  
+        <div class="row">
+            <div class="col-md-3">
+                <label class="form-label">First Name<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" [ngModel]="first_name" name="f_name" #f_name="ngModel" required>
+                <small class="text-danger" *ngIf="f_name.touched && f_name.invalid">Please enter first name</small>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Last Name<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" [ngModel]="last_name" name="l_name" #l_name="ngModel" required>
+                <small class="text-danger" *ngIf="l_name.touched && l_name.invalid">Please enter last name</small>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Username<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" [ngModel]="username" name="u_name" #u_name="ngModel" required>
+                <small class="text-danger" *ngIf="u_name.touched && u_name.invalid">Please enter username</small>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Contact Number<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" [ngModel]="contact" name="c_no" #c_no="ngModel" required>
+                <small class="text-danger" *ngIf="c_no.touched && c_no.invalid">Please enter contact number</small>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-3">
+                <label class="form-label">Property<span class="text-danger">*</span></label>
+                <select class="form-select" [ngModel]="property" name="prop" #prop="ngModel" required>
+                    <option [value]="'N/A'">---Select Property---</option>
+                    <option *ngFor="let p of properties" [value]="p.id">{{p.name}}</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Role<span class="text-danger">*</span></label>
+                <select class="form-select" [ngModel]="role" name="rol" #rol="ngModel" required>
+                    <option [value]="'N/A'">---Select Role---</option>
+                    <option *ngFor="let r of roles" [value]="r.id">{{r.name}}</option>
+                </select>
+            </div>
+            <div class="col-md-3" *ngIf="!editMode">
+                <label class="form-label">Password<span class="text-danger">*</span></label>
+                <input type="password" class="form-control" [ngModel]="password" name="pswd" #pswd="ngModel" required>
+                <small class="text-danger" *ngIf="pswd.touched && pswd.invalid">Please enter password</small>
+            </div>
+            <div class="col-md-3" *ngIf="!editMode">
+                <label class="form-label">Confirm Password<span class="text-danger">*</span></label>
+                <input type="password" class="form-control" [ngModel]="password2" name="pswd2" #pswd2="ngModel" required>
+                <div *ngIf="pswd2.touched">
+                    <small class="text-danger" *ngIf="pswd2.invalid">Please confirm password</small>
+                    <small class="text-danger" *ngIf="pswd.value !== pswd2.value">Password Mismatch</small>
+                </div>
+            </div>
+        </div>
+        <div class="alert alert-success mt-3" *ngIf="status === 'success'">
+            {{ editMode ? 'User Updated Successfully' : 'User Added Successfully'}}
+        </div>
+        <div class="d-flex justify-content-center align-items-center mt-4">
+            <button class="btn btn-primary" type="button" (click)="onGoBack()">Go Back</button>
+            <button class="btn btn-primary ms-3" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" *ngIf="editMode">Change Password</button>
+            <button class="btn btn-primary ms-3" type="submit" [disabled]="user.invalid || pswd.value !== pswd2.value">{{ editMode ? 'Update': 'Submit'}}</button>
+        </div>
+    </form>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Change Password</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form #passwd="ngForm" (ngSubmit)="onChangeUserPassword(passwd)">
+                <div class="modal-body">
+                    <div class="form">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="form-label">Username</label>
+                                <input type="text" class="form-control" [ngModel]="username" name="u_name" disabled>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <label class="form-label">Password<span class="text-danger">*</span></label>
+                                <input type="password" class="form-control" ngModel name="pswd" #pswd="ngModel" required>
+                                <small class="text-danger" *ngIf="pswd.invalid && pswd.touched">Please enter password</small>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <label class="form-label">Confirm Password<span class="text-danger">*</span></label>
+                                <input type="password" class="form-control" ngModel name="pswd2" #pswd2="ngModel" required>
+                                <div *ngIf="pswd2.touched">
+                                    <small class="text-danger" *ngIf="pswd2.invalid">Please confirm password</small>
+                                    <small class="text-danger" *ngIf="pswd.value !== pswd2.value">Password Mismatch</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-3">
+                    <div class="alert alert-success mt-3" *ngIf="status === 'success'">
+                        <span>Password Updated Successfully</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+                    <button type="button" class="btn btn-primary" type="submit">Submit</button>
+                </div>
+            </form>
+          </div>
+        </div>
+    </div>
+</div>

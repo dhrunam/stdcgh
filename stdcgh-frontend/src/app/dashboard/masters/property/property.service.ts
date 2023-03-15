@@ -12,25 +12,24 @@ export interface Property{
 }
 @Injectable({providedIn: 'root'})
 export class PropertyService{
-    properties: any = [];
-    details!: Property;
     constructor(private http: HttpService){}
     get_properties(){
-        return this.http.get_properties()
+        return this.http.get_properties();
     }
     get_property(id:number){
-        return this.http.get_property(id)
+        return this.http.get_property(id);
     }
-    add_property(data:any){
-        return this.http.add_property(data).pipe(catchError(this.handleError))
+    add_property(data:FormData){
+        return this.http.add_property(data).pipe(catchError(this.handleError));
     }
-    update_property(data:any){
-        return this.http.update_property(data)
+    update_property(data:FormData){
+        return this.http.update_property(data).pipe(catchError(this.handleError));
     }
-    delete_property(data:any){
+    delete_property(data:FormData){
         return this.http.delete_property(data);
     }
     private handleError(errorResponse: HttpErrorResponse){
+        console.log(errorResponse);
         let errMessage: string;
         if(errorResponse.error.code[0]){
             errMessage = 'Error !! Property already exists';

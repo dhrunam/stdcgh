@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
 import { TaxRoutingModule } from './tax-routing.module';
 import { TaxComponent } from './tax.component';
+import { UtilitiesModule } from 'src/app/utilities/utilities.module';
 
 
 @NgModule({
@@ -10,7 +9,7 @@ import { TaxComponent } from './tax.component';
     TaxComponent
   ],
   imports: [
-    CommonModule,
+    UtilitiesModule,
     TaxRoutingModule
   ]
 })

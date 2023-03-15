@@ -1,0 +1,49 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<div class="px-5 py-2" *ngIf="!showLoader">
+    <h3>{{ editMode ? 'Edit Room Tariff' : 'Add Room Tariff'}}</h3>
+    <hr>
+    <form #roomRate="ngForm" (ngSubmit)="onSubmit(roomRate)">
+        <div class="row">
+            <div class="col-md-3">
+                <label class="form-label">Property<span class="text-danger">*</span></label>
+                <input class="text" class="form-control" [(ngModel)]="property_name" name="property_name" disabled *ngIf="editMode">
+                <select class="form-select" [(ngModel)]="property" (change)="onGetRooms($event)" name="property" *ngIf="!editMode">
+                    <option [value]="'N/A'">---Select Property---</option>
+                    <option *ngFor="let p of properties" [value]="p.id">{{p.name}}</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Room<span class="text-danger">*</span></label>
+                <input class="text" class="form-control" [(ngModel)]="room_no" name="room_no" disabled *ngIf="editMode">
+                <select class="form-select" [(ngModel)]="room" name="room" *ngIf="!editMode">
+                    <option [value]="'N/A'">---Select Room---</option>
+                    <option *ngFor="let r of rooms" [value]="r.id">{{r.room_no}}</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Cost<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" [ngModel]="cost" name="c" #c="ngModel" required>
+                <small class="text-danger" *ngIf="c.touched && c.invalid">Please enter cost</small>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Start Date<span class="text-danger">*</span></label>
+                <input type="date" class="form-control" [ngModel]="start_date" name="start" #start="ngModel" required>
+                <small class="text-danger" *ngIf="start.touched && start.invalid">Please select start date</small>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-3">
+                <label class="form-label">End Date<span class="text-danger">*</span></label>
+                <input type="date" class="form-control" [ngModel]="end_date" name="end" #end="ngModel" required>
+                <small class="text-danger" *ngIf="end.touched && end.invalid">Please select end date</small>
+            </div>
+        </div>
+        <div class="alert alert-success mt-3" *ngIf="status === 'success'">
+            <span>{{ editMode ? 'Room Tariff Updated Successfully' : 'Room Tariff Added Successfully'}}</span>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+            <button class="btn btn-primary" type="button" (click)="onGoBack()">Go Back</button>
+            <button class="btn btn-primary ms-3" type="submit">{{ editMode ? 'Update' : 'Submit'}}</button>
+        </div>
+    </form>
+</div>
