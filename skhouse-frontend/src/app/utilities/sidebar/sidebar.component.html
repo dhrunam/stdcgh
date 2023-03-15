@@ -1,0 +1,91 @@
+<div class="sidebar">
+    <div class="logo_content">
+        <div class="logo text-center text-light mt-4">
+            <img src="assets/images/stdc.png" height="90">
+        </div>
+        <i class='bi bi-justify' id="btn"></i>
+    </div>
+    <hr>
+    <ul class="nav_list">
+        <li [routerLink]="['/dashboard/home']" [routerLinkActive]="'active'">
+            <div class="icon-link">
+                <label>
+                    <i class="bi bi-pc-display-horizontal"></i>
+                    <span class="links_name">Dashboard</span>
+                </label>
+            </div>
+        </li>
+        <li [routerLink]="['/dashboard/booking']" [routerLinkActive]="'active'">
+            <div class="icon-link">
+                <label>
+                    <i class="bi bi-house-add"></i>
+                    <span class="links_name">Book Room</span>
+                </label>
+            </div>
+        </li>
+        <li>
+            <div class="icon-link">
+                <label href="/dashboard">
+                    <i class="bi bi-puzzle"></i>
+                    <span class="links_name">Extension</span>
+                </label>
+            </div>
+        </li>
+        <li>
+            <div class="icon-link">
+                <label href="/dashboard">
+                    <i class="bi bi-x-circle"></i>
+                    <span class="links_name">Cancel</span>
+                </label>
+            </div>
+        </li>
+        <li [routerLink]="['/dashboard/modify']" [routerLinkActive]="'active'">
+            <div class="icon-link">
+                <label href="/dashboard">
+                    <i class="bi bi-pencil-square"></i>
+                    <span class="links_name">Modify</span>
+                </label>
+            </div>
+        </li>
+        <li>
+            <div class="icon-link">
+                <label href="/dashboard">
+                    <i class="bi bi-r-circle"></i>
+                    <span class="links_name">Register</span>
+                </label>
+            </div>
+        </li>
+        <li>
+            <div class="icon-link">
+                <label href="/dashboard">
+                    <i class="bi bi-bar-chart"></i>
+                    <span class="links_name">Occupancy Chart</span>
+                </label>
+            </div>
+        </li>
+        <li>
+            <div class="icon-link">
+                <label href="/dashboard">
+                    <i class="bi bi-check2-square"></i>
+                    <span class="links_name">Allotment</span>
+                </label>
+            </div>
+        </li>
+        <li>
+            <div class="icon-link">
+                <label href="/dashboard">
+                    <i class="bi bi-hourglass-bottom"></i>
+                    <span class="links_name">Availability</span>
+                </label>
+            </div>
+        </li>
+        <li>
+            <div class="icon-link">
+                <label href="/dashboard">
+                    <i class="bi bi-gear-wide-connected"></i>
+                    <span class="links_name">Backup DB</span>
+                </label>
+            </div>
+        </li>
+    </ul>
+</div>

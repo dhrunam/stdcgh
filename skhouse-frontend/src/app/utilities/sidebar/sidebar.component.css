@@ -1,0 +1,107 @@
+.sidebar{
+    position:sticky;
+    top:0;
+    left:0;
+    background: #fff;
+    min-height: 906px;
+    height:100%;
+    width: 280px;
+    padding: 6px 0;
+    transition: all 0.4s ease;
+}
+:focus{
+    border-color: #fff !important;
+    outline: 0 !important;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0) !important;
+}
+.accordion-button:not(.collapsed){
+    background-color: #D0F7CB;
+    color: #2a981c;
+}
+.sidebar.closed{
+    width: 78px;
+}
+.sidebar .logo_content .logo img{
+    opacity: 1;
+    pointer-events: none;
+}
+.sidebar.closed .logo_content .logo img{
+    opacity: 0;
+    pointer-events: none;
+    height: 20px;
+    width: 50px;
+}
+.sidebar #btn{
+    color: #000;
+    position: absolute;
+    top:3px;
+    left: 90%;
+    line-height: 50px;
+    font-size: 35px;
+    width:50px;
+    height: 50px;
+    text-align: center;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+.sidebar.closed #btn{
+    left: 50%;
+}
+.sidebar .nav_list{
+    overflow: auto;
+}
+.sidebar.closed .nav_list{
+    overflow: visible;
+}
+.sidebar .nav_list li{
+    margin-left: -30px;
+    position: relative;
+    list-style: none;
+    transition: all .4s ease;
+    cursor: pointer;
+}
+.sidebar .nav_list li .icon-link{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.sidebar.closed .nav_list li .icon-link{
+    display: block;
+}
+.sidebar .nav_list li i{
+    height: 50px;
+    min-width: 78px;
+    text-align: center;
+    line-height: 50px;
+    color: #000;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.sidebar .nav_list li label{
+    display:flex;
+    text-decoration: none;
+    align-items: center;
+}
+.sidebar .nav_list li label .links_name{
+    font-size: 18px;
+    font-weight: 400;
+    cursor: pointer;
+}
+.sidebar.closed .nav_list label .links_name{
+    opacity: 0;
+    pointer-events: none;
+}
+.active .icon-link{
+    background-color: #2a981c;
+    border-radius: 0px 20px 20px 0;
+}
+.active .icon-link label i,
+.active .icon-link label span{
+    color: #fff;
+}
+@media(max-width: 1136px){
+    .sidebar{
+        display:none;
+    }
+}

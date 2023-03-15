@@ -1,0 +1,42 @@
+.header{
+    display: none;
+    top:0;
+    left:0;
+    background: #fff;
+    height: 20px;
+    width: 100%;
+}
+.bi{
+    cursor: pointer;
+}
+.offcanvas-header{
+    display: flex;
+    justify-content: center;
+}
+.offcanvas-body ul li{
+    list-style: none;
+    cursor: pointer;
+    height: 50px;
+    padding: 8px;
+    margin-left: -45px;
+}
+.offcanvas-body ul li .items i,
+.offcanvas-body ul li .items span{
+    font-size: 20px;
+}
+.offcanvas-body ul li .items i{
+    margin-left: 40px;
+}
+.active{
+    background-color: #2a981c;
+    border-radius: 0 20px 20px 0;
+}
+.active .items i,
+.active .items label{
+    color: white;
+}
+@media(max-width: 1136px){
+    .header{
+        display:block;
+    }
+}
