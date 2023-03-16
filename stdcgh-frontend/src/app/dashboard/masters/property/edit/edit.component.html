@@ -39,7 +39,7 @@
         <div class="alert mt-3" [ngClass]="{'alert-success': status === 'success', 'alert-danger': (status !== 'success' && status !== '')}">
             {{ status === 'success' ? (editMode ? 'Profile Updated Successfully' : 'Profile Added Successfully') : status  }}
         </div>
-        <div class="d-flex justify-content-center align-items-center mt-4">
+        <div class="d-flex justify-content-center align-items-center">
             <button class="btn btn-primary" type="button" (click)="onGoBack()">Go Back</button>
             <button class="btn btn-primary ms-3" type="submit">{{ editMode ? 'Update' : 'Submit'}}</button>
         </div>

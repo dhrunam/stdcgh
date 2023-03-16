@@ -1,16 +1,21 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
 import { TariffRoutingModule } from './tariff-routing.module';
 import { TariffComponent } from './tariff.component';
+import { EditComponent } from './edit/edit.component';
+import { ViewComponent } from './view/view.component';
+import { UtilitiesModule } from 'src/app/utilities/utilities.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
-    TariffComponent
+    TariffComponent,
+    EditComponent,
+    ViewComponent
   ],
   imports: [
-    CommonModule,
+    UtilitiesModule,
+    FormsModule,
     TariffRoutingModule
   ]
 })

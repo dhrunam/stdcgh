@@ -1,0 +1,36 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<div class="px-5 py-2"  *ngIf="!showLoader">
+    <div class="text-end">
+        <button class="btn btn-primary" (click)="onRouteAddRoom()">+ Add Room</button>
+    </div>
+    <div class="err text-center mt-3" *ngIf="!rooms[0]">
+        <h4>No Properties Found</h4>
+    </div>
+    <table class="table table-bordered mt-3" *ngIf="rooms[0]">
+        <thead>
+            <tr>
+                <th scope="col">S.No.</th>
+                <th scope="col">Room No</th>
+                <th scope="col">Room Category</th>
+                <th scope="col">Guest House</th>
+                <th scope="col">Is Operational ?</th>
+                <th scope="col" class="text-center">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let r of rooms; let i=index">
+                <td width="4%" class="text-center">{{i+1}}</td>
+                <td>{{r.room_no}}</td>
+                <td>{{r.related_category.name}}</td>
+                <td>{{r.related_property.name}}</td>
+                <td width="18%">
+                    <div class="form-check form-switch d-flex justify-content-center">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" (click)="isOperational(r.id, 'true')" *ngIf="!r.is_operational">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" (click)="isOperational(r.id, 'false')" *ngIf="r.is_operational" checked>
+                    </div>
+                </td>
+                <td width="10%" class="text-center"><i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit" (click)="onRouteEditRoom(r.id)"></i></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,4 +1,5 @@
-.btn{
+.btn,
+.btn:disabled{
     background-color: #2a981c;
     border-color: #2a981c;
 }

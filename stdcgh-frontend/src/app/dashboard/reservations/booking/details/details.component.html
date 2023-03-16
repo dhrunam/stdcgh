@@ -1,0 +1,48 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<div class="px-5" *ngIf="!showLoader">
+    <main class="mt-5">
+        <h4>Add Details</h4>
+        <hr>
+        <form (ngSubmit)="onConfirmReservation(resvForm)" #resvForm="ngForm">
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="form-label">Guest Name<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" ngModel name="guest_name" #guest_name="ngModel" required>
+                    <small class="text-danger" *ngIf="guest_name.touched && guest_name.invalid">Please enter a guest name</small>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Reservation For<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" ngModel name="resv_for" #resv_for="ngModel" required>
+                    <small class="text-danger" *ngIf="resv_for.touched && resv_for.invalid">Please enter reservation for</small>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Reservation From<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" ngModel name="resv_from" #resv_from="ngModel" required>
+                    <small class="text-danger" *ngIf="resv_from.touched && resv_from.invalid">Please enter reservation from</small>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Contact Number<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" ngModel name="contact" #contact="ngModel" required>
+                    <small class="text-danger" *ngIf="contact.touched && contact.invalid">Please enter a contact number</small>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <label class="form-label">Address<span class="text-danger">*</span></label>
+                    <textarea class="form-control" rows="5" cols="10" ngModel name="address" #address="ngModel" required></textarea>
+                    <small class="text-danger" *ngIf="address.touched && address.invalid">Please enter an address</small>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <label class="form-label">Remarks</label>
+                    <textarea class="form-control" rows="3" cols="10" ngModel name="remarks" #remarks="ngModel"></textarea>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <!-- <button class="btn btn-primary" type="button">Preview</button> -->
+                <button class="btn btn-primary ms-3" type="submit">Submit</button>
+            </div>
+        </form>
+    </main>
+</div>

@@ -6,12 +6,12 @@ import { HomeComponent } from './home/home.component';
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard/home', pathMatch: 'full'},
   { path: '', component: DashboardComponent, children: [
-      { path: 'home', component: HomeComponent},
-      { path: 'masters', loadChildren: () => import('./masters/masters.module').then(m => m.MastersModule)},
-      { path: 'configurations', loadChildren: () => import('./configuration/configuration.module').then(m => m.ConfigurationModule)},
+      { path: 'home', component: HomeComponent },
+      { path: 'masters', loadChildren: () => import('./masters/masters.module').then(m => m.MastersModule) },
+      { path: 'configurations', loadChildren: () => import('./configuration/configuration.module').then(m => m.ConfigurationModule) },
+      { path: 'reservations', loadChildren: () => import('./reservations/reservations.module').then(m => m.ReservationsModule)},
     ]
   },
-  { path: 'miscellaneous', loadChildren: () => import('./reservations/miscellaneous/miscellaneous.module').then(m => m.MiscellaneousModule) },
 ];
 
 @NgModule({

@@ -47,45 +47,69 @@
                 </label>
             </div>
         </li>
-        <!-- <li>
+        <li *ngIf="role === 1" routerLink="/dashboard/configurations/tariff" routerLinkActive="active">
             <div class="icon-link">
-                <label href="/dashboard">
-                    <i class="bi bi-r-circle"></i>
-                    <span class="links_name">Register</span>
+                <label>
+                    <i class="bi bi-currency-rupee"></i>
+                    <span class="links_name">Room Tariff</span>
                 </label>
             </div>
         </li>
-        <li>
+        <li *ngIf="role === 1" routerLink="/dashboard/configurations/tax" routerLinkActive="active">
             <div class="icon-link">
-                <label href="/dashboard">
-                    <i class="bi bi-bar-chart"></i>
-                    <span class="links_name">Occupancy Chart</span>
+                <label>
+                    <i class="bi bi-file-earmark-spreadsheet"></i>
+                    <span class="links_name">Taxes</span>
                 </label>
             </div>
         </li>
-        <li>
+        <li *ngIf="role === 2" routerLink="/dashboard/reservations/booking" routerLinkActive="active">
             <div class="icon-link">
-                <label href="/dashboard">
-                    <i class="bi bi-check2-square"></i>
-                    <span class="links_name">Allotment</span>
+                <label>
+                    <i class="bi bi-pencil-square"></i>
+                    <span class="links_name">Booking</span>
                 </label>
             </div>
         </li>
-        <li>
+        <li *ngIf="role === 2" routerLink="/dashboard/reservations/cancel" routerLinkActive="active">
             <div class="icon-link">
-                <label href="/dashboard">
-                    <i class="bi bi-hourglass-bottom"></i>
-                    <span class="links_name">Availability</span>
+                <label>
+                    <i class="bi bi-x-circle"></i>
+                    <span class="links_name">Cancel</span>
                 </label>
             </div>
         </li>
-        <li>
+        <li *ngIf="role === 3" routerLink="/dashboard/reservations/checkin" routerLinkActive="active">
             <div class="icon-link">
-                <label href="/dashboard">
-                    <i class="bi bi-gear-wide-connected"></i>
-                    <span class="links_name">Backup DB</span>
+                <label>
+                    <i class="bi bi-clipboard-plus"></i>
+                    <span class="links_name">Checkin</span>
                 </label>
             </div>
-        </li> -->
+        </li>
+        <li *ngIf="role === 3" routerLink="/dashboard/reservations/checkout" routerLinkActive="active">
+            <div class="icon-link">
+                <label>
+                    <i class="bi bi-clipboard-minus"></i>
+                    <span class="links_name">Checkout</span>
+                </label>
+            </div>
+        </li>
+        <li *ngIf="role === 3" routerLink="/dashboard/reservations/miscellaneous" routerLinkActive="active">
+            <div class="icon-link">
+                <label>
+                    <i class="bi bi-clipboard-data"></i>
+                    <span class="links_name">Miscellaneous</span>
+                </label>
+            </div>
+        </li>
+        <li *ngIf="role === 3" routerLink="/dashboard/reservations/billing" routerLinkActive="active">
+            <div class="icon-link">
+                <label>
+                    <i class="bi bi-clipboard2-check"></i>
+                    <span class="links_name">Billing</span>
+                </label>
+            </div>
+        </li>
     </ul>
 </div>

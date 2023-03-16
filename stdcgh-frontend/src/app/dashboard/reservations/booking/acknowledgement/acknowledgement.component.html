@@ -1,0 +1,166 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<div class="title text-center" *ngIf="!showLoader && showAck">
+    <div class="ack">
+        <div class="wrapper"> <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/> <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+        </svg>
+        </div>
+        <div class="text-center">
+            <h3>Booking Successfull !!</h3>
+        </div>
+    </div>
+</div>
+<section class="px-5">
+    <div class="header d-flex justify-content-between px-3 py-2 mt-5">
+        <div></div>
+        <h5>Acknowledgement Receipt</h5>
+        <i class="bi bi-printer" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Print" style="font-size: 22px;" (click)="onPrintAck()"></i>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="form-label"><b>Booking ID</b></label>
+                </div>
+                <div class="col-md-1">
+                    <label class="form-label">:</label>
+                </div>
+                <div class="col-md-8">
+                    <label class="form-label">{{ details.booking_id }}</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="form-label"><b>Booking Date</b></label>
+                </div>
+                <div class="col-md-1">
+                    <label class="form-label">:</label>
+                </div>
+                <div class="col-md-8">
+                    <label class="form-label">{{ details.booking_date | date: 'dd-MM-YYYY' }}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="form-label"><b>Guest Name</b></label>
+                </div>
+                <div class="col-md-1">
+                    <label class="form-label">:</label>
+                </div>
+                <div class="col-md-8">
+                    <label class="form-label">{{ details.guest_name }}</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="form-label"><b>Contact Number</b></label>
+                </div>
+                <div class="col-md-1">
+                    <label class="form-label">:</label>
+                </div>
+                <div class="col-md-8">
+                    <label class="form-label">{{ details.contact_no }}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="form-label"><b>Check-In Date</b></label>
+                </div>
+                <div class="col-md-1">
+                    <label class="form-label">:</label>
+                </div>
+                <div class="col-md-8">
+                    <label class="form-label">{{ details.checkin_date | date: 'dd-MM-YYYY' }}</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="form-label"><b>Check-Out Date</b></label>
+                </div>
+                <div class="col-md-1">
+                    <label class="form-label">:</label>
+                </div>
+                <div class="col-md-8">
+                    <label class="form-label">{{ details.checkout_date | date: 'dd-MM-YYYY' }}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="form-label"><b>Address</b></label>
+                </div>
+                <div class="col-md-1">
+                    <label class="form-label">:</label>
+                </div>
+                <div class="col-md-8">
+                    <label class="form-label">{{ details.address }}</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="form-label"><b>Guest House</b></label>
+                </div>
+                <div class="col-md-1">
+                    <label class="form-label">:</label>
+                </div>
+                <div class="col-md-8">
+                    <label class="form-label">{{ details.property }}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="room-list mt-4 mb-5">
+        <label class="form-label"><b>Description</b></label>
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col" width="5%">S.No.</th>
+                    <th scope="col">Room No</th>
+                    <th scope="col">Room Type</th>
+                    <th scope="col">No. of Days</th>
+                    <th scope="col">Room Cost</th>
+                    <th scope="col">Total Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let r of rooms; let i=index">
+                    <td scope="col" class="text-center">{{i+1}}</td>
+                    <td scope="col">{{ r.related_room.room_no }}</td>
+                    <td scope="col">{{ r.related_room.related_category.name }}</td>
+                    <td scope="col">{{ days[i].days }}</td>
+                    <td scope="col">₹ {{ r.room_rate }}</td>
+                    <td scope="col">₹ {{ r.room_rate * days[i].days }}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th id="total" colspan="5">Total:</th>
+                    <td>₹ {{ totalCost }}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</section>

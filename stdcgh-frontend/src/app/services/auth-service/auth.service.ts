@@ -12,7 +12,7 @@ export interface AuthResponse{
 @Injectable({ providedIn: 'root'})
 export class AuthService{
     constructor(private http: HttpService, private localStorageService: LocalStorageService){}
-    onLogin(data:any){
+    onLogin(data:FormData){
         return this.http.login(data).pipe(
             catchError(this.handleError),
             tap(response => {

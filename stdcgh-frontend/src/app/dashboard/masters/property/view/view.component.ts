@@ -25,7 +25,7 @@ export class ViewComponent{
     fd.append('id', id.toString());
     fd.append('is_operational', status.toString());
     this.propertyService.delete_property(fd).subscribe({
-      next: data => this.getProperties(),
+      next: () => this.getProperties(),
     })
   }
   getProperties(){
