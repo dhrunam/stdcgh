@@ -5,29 +5,29 @@
     <form #tax="ngForm" (ngSubmit)="onSubmit(tax)">
         <div class="row">
             <div class="col-md-3">
-                <label class="form-label">Upper Limit<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" [ngModel]="upper_limit" name="upper" #upper="ngModel" required>
-                <small class="text-danger" *ngIf="upper.touched && upper.invalid">Please enter cost</small>
-            </div>
-            <div class="col-md-3">
                 <label class="form-label">Lower Limit<span class="text-danger">*</span></label>
                 <input type="text" class="form-control" [ngModel]="lower_limit" name="lower" #lower="ngModel" required>
                 <small class="text-danger" *ngIf="lower.touched && lower.invalid">Please enter cost</small>
             </div>
             <div class="col-md-3">
-                <label class="form-label">CGST<span class="text-danger">*</span></label>
+                <label class="form-label">Upper Limit<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" [ngModel]="upper_limit" name="upper" #upper="ngModel" required>
+                <small class="text-danger" *ngIf="upper.touched && upper.invalid">Please enter cost</small>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">CGST(%)<span class="text-danger">*</span></label>
                 <input type="text" class="form-control" [ngModel]="c_gst" name="cgst" #cgst="ngModel" required>
                 <small class="text-danger" *ngIf="cgst.touched && cgst.invalid">Please enter cost</small>
             </div>
             <div class="col-md-3">
-                <label class="form-label">SGST<span class="text-danger">*</span></label>
+                <label class="form-label">SGST(%)<span class="text-danger">*</span></label>
                 <input type="text" class="form-control" [ngModel]="s_gst" name="sgst" #sgst="ngModel" required>
                 <small class="text-danger" *ngIf="sgst.touched && sgst.invalid">Please enter cost</small>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-md-3">
-                <label class="form-label">Other Taxes<span class="text-danger">*</span></label>
+                <label class="form-label">Other Taxes(%)<span class="text-danger">*</span></label>
                 <input type="text" class="form-control" [ngModel]="other_taxes" name="otaxes" #otaxes="ngModel" required>
                 <small class="text-danger" *ngIf="otaxes.touched && otaxes.invalid">Please select start date</small>
             </div>

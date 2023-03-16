@@ -42,6 +42,14 @@ export class CheckinComponent {
       next: () => this.getBooking(),
     })
   }
+  onNoShow(){
+    let fd = new FormData();
+    fd.append('id', this.resv_id);
+    fd.append('operation', 'noshow');
+    this.timeCardService.on_no_show(fd).subscribe({
+      next: () => { this.getBooking() },
+    })
+  }
   selectAll(event: any){
     this.send_data = [];
     var ele:any = document.getElementsByName('chk');

@@ -7,7 +7,7 @@ export class CancelService{
     get_checkin_reservations(checkin_date:string){
         return this.http.get_checkin_reservations(checkin_date)
     }
-    on_cancellation(data:any){
+    on_cancellation(data:FormData){
         return this.http.on_cancel_booking(data)
     }
 }

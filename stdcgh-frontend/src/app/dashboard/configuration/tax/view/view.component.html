@@ -10,11 +10,11 @@
         <thead>
             <tr>
                 <th scope="col">S.No.</th>
-                <th scope="col">Upper Limit</th>
+                <th scope="col">CGST(%)</th>
+                <th scope="col">SGST(%)</th>
                 <th scope="col">Lower Limit</th>
-                <th scope="col">CGST</th>
-                <th scope="col">SGST</th>
-                <th scope="col">Service Tax</th>
+                <th scope="col">Upper Limit</th>
+                <th scope="col">Service Tax(%)</th>
                 <th scope="col">Start Date</th>
                 <th scope="col">End Date</th>
                 <th scope="col">Is Applicable ?</th>
@@ -24,14 +24,19 @@
         <tbody>
             <tr *ngFor="let t of taxes; let i=index">
                 <td width="4%" class="text-center">{{i+1}}</td>
-                <td>{{t.upper_limit}}</td>
-                <td>{{t.lower_limit}}</td>
                 <td>{{t.cgst_percentage}}</td>
                 <td>{{t.sgst_percentage}}</td>
+                <td>{{t.lower_limit}}</td>
+                <td>{{t.upper_limit}}</td>
                 <td>{{t.service_tax_percentage}}</td>
-                <td>{{t.start_date}}</td>
-                <td>{{t.end_date}}</td>
-                <td>{{t.is_applicable}}</td>
+                <td>{{t.start_date | date: 'dd-MM-YYYY'}}</td>
+                <td>{{t.end_date | date: 'dd-MM-YYYY'}}</td>
+                <td>
+                    <div class="form-check form-switch d-flex justify-content-center">
+                        <!-- <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" (click)="onDisableTax(false, t.id)" *ngIf="t.is_applicable" checked>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" (click)="onDisableTax(true, t.id)" *ngIf="!t.is_applicable"> -->
+                    </div>
+                </td>
                 <td width="10%" class="text-center"><i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit" (click)="onRouteEditTax(t.id)"></i></td>
             </tr>
         </tbody>

@@ -18,4 +18,7 @@ export class TimeCardService {
   on_checkout(fd:FormData){
     return this.http.on_checkout(fd)
   }
+  on_no_show(data:FormData){
+    return this.http.on_cancel_booking(data)
+  }
 }

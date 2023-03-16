@@ -107,7 +107,7 @@ export class BillingComponent {
           alignment: 'center',
         },
         {
-          text: 'HIGH COURT OF SIKKIM',
+          text: 'Sikkim Tourism Development Corporation',
           alignment: 'center',
           bold: true,
           margin: [0, 15, 0, 0]
