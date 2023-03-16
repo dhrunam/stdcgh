@@ -21,7 +21,7 @@
                 <td width="4%" class="text-center">{{i+1}}</td>
                 <td><span>{{ u.first_name ? u.first_name+' '+u.last_name : 'N/A'}}</span></td>
                 <td>{{ u.username }}</td>
-                <td><span>{{u.related_profile[0].contact_number ? u.related_profile[0].contact_number : 'N/A'}}</span></td>
+                <td><span>{{u.related_profile[0] ? u.related_profile[0].contact_number : 'N/A'}}</span></td>
                 <td width="10%" class="text-center"><i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit" (click)="onRouteEditUser(u.id)"></i> / <i class="bi bi-trash3"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete" (click)="onDeleteUser(u.id)"></i></td>
             </tr>
         </tbody>

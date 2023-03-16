@@ -1,0 +1,35 @@
+<div class="title text-center mt-5">
+    <h2>Cancellation</h2>
+</div>
+<div class="d-flex justify-content-center mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <label class="form-label">Select Date</label>
+            <input type="date" class="form-control" [(ngModel)]="date" name="date" (input)="getBooking()">
+        </div>
+    </div>
+</div>
+<div class="text-center mt-5" *ngIf="showData === 'false'">
+    <h4>No Bookings Found</h4>
+</div>
+<section class="px-5 py-2 mt-5" *ngIf="showData === 'true'">
+    <h5>Booking(s)</h5>
+    <hr>
+    <div class="row" >
+        <div class="col-md-3" *ngFor="let c of checkin_data">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Booking ID: {{c.reservation_no}}</h5>
+                    <h6 class="card-subtitle mt-3 mb-2 text-muted">Guest Name: {{c.lead_guest_name}}</h6>
+                    <h6 class="card-subtitle mt-3 mb-2 text-muted">Contact Number: {{c.contact_no}}</h6>
+                    <h6 class="card-subtitle mt-3 mb-2 text-muted">Room(s) Booked: 
+                        <label *ngFor="let r of c.reservation_room_details">{{r.related_room.room_no}},</label>
+                    </h6>
+                    <div class="text-end">
+                        <a class="card-link" style="cursor: pointer; text-decoration: none; color: red;" (click)="onCancel(c.id)">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,24 @@
+<section class="px-5 py-2 mt-5">
+    <div class="d-flex justify-content-between">
+        <h5>List of Booking</h5>
+        <h5>Date: {{ todayDate | date: 'dd-MM-YYYY' }}</h5>
+    </div>
+    <hr>
+    <div *ngIf="!showData">
+        <h4>No Bookings Available</h4>
+    </div>
+    <div class="row" *ngIf="showData">
+        <div class="col-md-3" *ngFor="let c of reservation_data">
+            <div class="card" [routerLink]="['../view', c.id]">
+                <div class="card-body">
+                    <h5 class="card-title">Booking ID: {{ c.reservation_no }}</h5>
+                    <h6 class="card-subtitle mt-3 mb-2 text-muted">Guest Name: {{ c.lead_guest_name }}</h6>
+                    <h6 class="card-subtitle mt-3 mb-2 text-muted">Contact Number: {{ c.contact_no }}</h6>
+                    <h6 class="card-subtitle mt-3 mb-2 text-muted">Room(s) Booked: 
+                        <label *ngFor="let r of c.reservation_room_details">{{r.related_room.room_no}}</label>
+                    </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

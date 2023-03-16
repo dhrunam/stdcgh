@@ -1,0 +1,53 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<div class="px-5 py-2" *ngIf="!showLoader">
+    <h3>{{ editMode ? 'Edit Room Tariff' : 'Add Room Tariff'}}</h3>
+    <hr>
+    <form #tax="ngForm" (ngSubmit)="onSubmit(tax)">
+        <div class="row">
+            <div class="col-md-3">
+                <label class="form-label">Upper Limit<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" [ngModel]="upper_limit" name="upper" #upper="ngModel" required>
+                <small class="text-danger" *ngIf="upper.touched && upper.invalid">Please enter cost</small>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Lower Limit<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" [ngModel]="lower_limit" name="lower" #lower="ngModel" required>
+                <small class="text-danger" *ngIf="lower.touched && lower.invalid">Please enter cost</small>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">CGST<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" [ngModel]="c_gst" name="cgst" #cgst="ngModel" required>
+                <small class="text-danger" *ngIf="cgst.touched && cgst.invalid">Please enter cost</small>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">SGST<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" [ngModel]="s_gst" name="sgst" #sgst="ngModel" required>
+                <small class="text-danger" *ngIf="sgst.touched && sgst.invalid">Please enter cost</small>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-3">
+                <label class="form-label">Other Taxes<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" [ngModel]="other_taxes" name="otaxes" #otaxes="ngModel" required>
+                <small class="text-danger" *ngIf="otaxes.touched && otaxes.invalid">Please select start date</small>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Start Date<span class="text-danger">*</span></label>
+                <input type="date" class="form-control" [ngModel]="start_date" name="start" #start="ngModel" required>
+                <small class="text-danger" *ngIf="start.touched && start.invalid">Please select start date</small>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">End Date<span class="text-danger">*</span></label>
+                <input type="date" class="form-control" [ngModel]="end_date" name="end" #end="ngModel" required>
+                <small class="text-danger" *ngIf="end.touched && end.invalid">Please select end date</small>
+            </div>
+        </div>
+        <div class="alert alert-success mt-3" *ngIf="status === 'success'">
+            <span>{{ editMode ? 'Room Tariff Updated Successfully' : 'Room Tariff Added Successfully'}}</span>
+        </div>
+        <div class="d-flex justify-content-center align-items-center mt-3">
+            <button class="btn btn-primary" type="button" (click)="onGoBack()">Go Back</button>
+            <button class="btn btn-primary ms-3" type="submit">{{ editMode ? 'Update' : 'Submit'}}</button>
+        </div>
+    </form>
+</div>

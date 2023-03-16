@@ -1,1 +1,64 @@
-<p>checkin works!</p>
+<div class="title text-center mt-5">
+    <h2>Check-In</h2>
+</div>
+<section class="px-5 py-2 mt-5">
+    <div class="d-flex justify-content-between">
+        <h5>Today's Booking</h5>
+        <h5>Date: {{ todayDate | date: 'dd-MM-YYYY' }}</h5>
+    </div>
+    <hr>
+    <div class="message" *ngIf="!showData">
+        <h4>No Bookings Available</h4>
+    </div>
+    <div class="row" *ngIf="showData">
+        <div class="col-md-3" *ngFor="let c of checkin_data">
+            <div class="card" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="onGetRooms(c.id,c.reservation_no,c.reservation_room_details)">
+                <div class="card-body">
+                    <h5 class="card-title">Booking ID: {{c.reservation_no}}</h5>
+                    <h6 class="card-subtitle mt-3 mb-2 text-muted">Guest Name: {{c.lead_guest_name}}</h6>
+                    <h6 class="card-subtitle mt-3 mb-2 text-muted">Contact Number: {{c.contact_no}}</h6>
+                    <h6 class="card-subtitle mt-3 mb-2 text-muted">Room(s) Booked: 
+                        <label *ngFor="let r of c.reservation_room_details">{{r.related_room.room_no}},</label>
+                    </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Booking ID: {{ bookingId }}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div>
+                <input type="checkbox" (click)="selectAll($event)" id="selectAll">&nbsp;&nbsp;Select All
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th width="5%" scope="col">Select</th>
+                        <th width="5%" scope="col">S.No.</th>
+                        <th scope="col">Room No</th>
+                        <th scope="col">Room Category</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center" *ngFor="let r of rooms; let i=index">
+                        <td><input type="checkbox" name="chk" (change)="onChangeEvent($event, r.related_room.id)"></td>
+                        <td>{{i+1}}</td>
+                        <td>{{r.related_room.room_no}}</td>
+                        <td>{{r.related_room.related_category.name}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onCheckin()">Check-In</button>
+        </div>
+      </div>
+    </div>
+</div>

@@ -28,26 +28,26 @@
         <div class="row mt-3">
             <div class="col-md-3">
                 <label class="form-label">Property<span class="text-danger">*</span></label>
-                <select class="form-select" [ngModel]="property" name="prop" #prop="ngModel" required>
+                <select class="form-select" [(ngModel)]="property" name="prop" #prop="ngModel" required>
                     <option [value]="'N/A'">---Select Property---</option>
                     <option *ngFor="let p of properties" [value]="p.id">{{p.name}}</option>
                 </select>
             </div>
             <div class="col-md-3">
                 <label class="form-label">Role<span class="text-danger">*</span></label>
-                <select class="form-select" [ngModel]="role" name="rol" #rol="ngModel" required>
+                <select class="form-select" [(ngModel)]="role" name="rol" #rol="ngModel" required>
                     <option [value]="'N/A'">---Select Role---</option>
                     <option *ngFor="let r of roles" [value]="r.id">{{r.name}}</option>
                 </select>
             </div>
-            <div class="col-md-3" *ngIf="!editMode">
+            <div class="col-md-3" [hidden]="editMode">
                 <label class="form-label">Password<span class="text-danger">*</span></label>
-                <input type="password" class="form-control" [ngModel]="password" name="pswd" #pswd="ngModel" required>
+                <input type="password" class="form-control" ngModel name="pswd" #pswd="ngModel">
                 <small class="text-danger" *ngIf="pswd.touched && pswd.invalid">Please enter password</small>
             </div>
-            <div class="col-md-3" *ngIf="!editMode">
+            <div class="col-md-3" [hidden]="editMode">
                 <label class="form-label">Confirm Password<span class="text-danger">*</span></label>
-                <input type="password" class="form-control" [ngModel]="password2" name="pswd2" #pswd2="ngModel" required>
+                <input type="password" class="form-control" ngModel name="pswd2" #pswd2="ngModel">
                 <div *ngIf="pswd2.touched">
                     <small class="text-danger" *ngIf="pswd2.invalid">Please confirm password</small>
                     <small class="text-danger" *ngIf="pswd.value !== pswd2.value">Password Mismatch</small>
@@ -60,7 +60,7 @@
         <div class="d-flex justify-content-center align-items-center mt-4">
             <button class="btn btn-primary" type="button" (click)="onGoBack()">Go Back</button>
             <button class="btn btn-primary ms-3" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" *ngIf="editMode">Change Password</button>
-            <button class="btn btn-primary ms-3" type="submit" [disabled]="user.invalid || pswd.value !== pswd2.value">{{ editMode ? 'Update': 'Submit'}}</button>
+            <button class="btn btn-primary ms-3" type="submit">{{ editMode ? 'Update': 'Submit'}}</button>
         </div>
     </form>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -82,17 +82,17 @@
                         <div class="row mt-3">
                             <div class="col-md-12">
                                 <label class="form-label">Password<span class="text-danger">*</span></label>
-                                <input type="password" class="form-control" ngModel name="pswd" #pswd="ngModel" required>
-                                <small class="text-danger" *ngIf="pswd.invalid && pswd.touched">Please enter password</small>
+                                <input type="password" class="form-control" ngModel name="chpswd" #chpswd="ngModel" required>
+                                <small class="text-danger" *ngIf="chpswd.invalid && chpswd.touched">Please enter password</small>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-12">
                                 <label class="form-label">Confirm Password<span class="text-danger">*</span></label>
-                                <input type="password" class="form-control" ngModel name="pswd2" #pswd2="ngModel" required>
-                                <div *ngIf="pswd2.touched">
-                                    <small class="text-danger" *ngIf="pswd2.invalid">Please confirm password</small>
-                                    <small class="text-danger" *ngIf="pswd.value !== pswd2.value">Password Mismatch</small>
+                                <input type="password" class="form-control" ngModel name="chpswd2" #chpswd2="ngModel" required>
+                                <div *ngIf="chpswd2.touched">
+                                    <small class="text-danger" *ngIf="chpswd2.invalid">Please confirm password</small>
+                                    <small class="text-danger" *ngIf="chpswd.value !== chpswd2.value">Password Mismatch</small>
                                 </div>
                             </div>
                         </div>

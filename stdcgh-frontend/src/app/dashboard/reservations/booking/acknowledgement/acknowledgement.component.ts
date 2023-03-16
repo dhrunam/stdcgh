@@ -11,8 +11,6 @@ import * as pdfFonts from "pdfmake/build/vfs_fonts";
   styleUrls: ['./acknowledgement.component.css']
 })
 export class AcknowledgementComponent {
-  showLoader: boolean = false;
-  showAck: boolean = false;
   acknowledge: any = [];
   details = {
     booking_id: '',
@@ -30,25 +28,19 @@ export class AcknowledgementComponent {
   rooms: any = [];
   private subscription!: Subscription;
   constructor(private bookingService: BookingService, private cdr: ChangeDetectorRef, private datePipe: DatePipe){}
-  ngOnInit(): void{
-  }
-  ngAfterViewInit():void{
-    this.showLoader = true;
-    this.showAck = false;
+  ngAfterViewInit():void{ 
     this.subscription = this.bookingService.acknowledgement.subscribe((d:any) => {
-        this.showLoader = false;
-        this.showAck = true;
-        this.details.booking_id = d.reservation_no;
-        this.details.checkin_date = d.checkin_date;
-        this.details.checkout_date = d.checkout_date;
-        this.details.contact_no = d.contact_no;
-        this.details.guest_name = d.guest_name;
-        this.details.booking_date = d.created_at;
-        this.details.address = d.address;
-        this.details.property = d.property;
-        this.rooms = d.reservation_room_details;
-        this.totalCost = d.totalCost;
-        this.days = d.days;
+      this.details.booking_id = d.reservation_no;
+      this.details.checkin_date = d.checkin_date;
+      this.details.checkout_date = d.checkout_date;
+      this.details.contact_no = d.contact_no;
+      this.details.guest_name = d.guest_name;
+      this.details.booking_date = d.created_at;
+      this.details.address = d.address;
+      this.details.property = d.property;
+      this.rooms = d.reservation_room_details;
+      this.totalCost = d.totalCost;
+      this.days = d.days;
     });
   }
   ngAfterViewChecked(): void{
@@ -90,7 +82,7 @@ export class AcknowledgementComponent {
     let docDefinition: any = {
       content: [
         {
-          image: await this.getBase64ImageFromURL("../../../assets/images/hcs_logo.png" ),
+          image: await this.getBase64ImageFromURL("../../../assets/images/stdc1.png" ),
           fit: [150,150],
           alignment: 'center',
         },

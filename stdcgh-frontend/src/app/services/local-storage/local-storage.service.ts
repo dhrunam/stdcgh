@@ -28,6 +28,11 @@ export class LocalStorageService {
     let username = JSON.parse(CryptoJS.AES.decrypt(data, SECRET_KEY).toString(CryptoJS.enc.Utf8));
     return username.username;
   }
+  public getPropertyId(){
+    let data: any = window.localStorage.getItem('userDetails');
+    let res_data = JSON.parse(CryptoJS.AES.decrypt(data,SECRET_KEY).toString(CryptoJS.enc.Utf8));
+    return res_data.related_profile[0].property;
+  }
   public clearSession(){
     localStorage.clear();
   }

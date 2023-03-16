@@ -16,10 +16,12 @@
                     <div class="form-floating mb-4">
                       <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="username" ngModel #username="ngModel" required>
                       <label for="floatingInput">Username</label>
+                      <small class="text-danger" *ngIf="username.touched && username.invalid">Please enter username</small>
                     </div>
                     <div class="form-floating mb-4">
                       <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" ngModel #password="ngModel" required>
                       <label for="floatingPassword">Password</label>
+                      <small class="text-danger" *ngIf="password.touched && password.invalid">Please enter password</small>
                     </div>
                     <div class="alert alert-danger" *ngIf="error">
                       {{error}}

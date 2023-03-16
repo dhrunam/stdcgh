@@ -1,0 +1,61 @@
+<form #parForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="row mt-5 px-5">
+        <div class="col-md-3">
+            <label class="form-label">Particulars<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" ngModel #particular="ngModel" name="particular" required>
+            <small class="text-danger" *ngIf="particular.touched && particular.invalid">Please enter a particular</small>
+        </div>
+        <div class="col-md-1">
+            <label class="form-label">Amount<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" ngModel #amount="ngModel" name="amount" required>
+            <small class="text-danger" *ngIf="amount.touched && amount.invalid">Please enter amount</small>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">From Date<span class="text-danger">*</span></label>
+            <input type="date" class="form-control" [min]="todayDate" ngModel #from_date="ngModel" name="from_date" required>
+            <small class="text-danger" *ngIf="from_date.touched && from_date.invalid">Please select from date</small>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">To Date<span class="text-danger">*</span></label>
+            <input type="date" class="form-control" [min]="todayDate" ngModel #to_date="ngModel" name="to_date" required>
+            <small class="text-danger" *ngIf="to_date.touched && to_date.invalid">Please select to date</small>
+        </div>
+        <div class="col-md-3">
+            <label class="form-label">Remarks</label>
+            <input type="text" class="form-control" ngModel #remarks="ngModel" name="remarks">
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-primary" style="margin-top: 31px;">+Add</button>
+        </div>
+    </div>
+</form>
+<hr>
+<main class="px-5">
+    <section *ngIf="!showParticulars">
+        <h5>No Particulars Found !!</h5>
+    </section>
+    <section *ngIf="showParticulars">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">S.No.</th>
+                    <th scope="col">Particular</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">From Date</th>
+                    <th scope="col">To Date</th>
+                    <th scope="col">Remarks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of particulars; let i=index">
+                    <td>{{ i+1 }}</td>
+                    <td>{{ p.particular }}</td>
+                    <td>₹ {{ p.cost }}</td>
+                    <td>{{ p.start_date }}</td>
+                    <td>{{ p.end_date}}</td>
+                    <td>{{ p.remarks || 'N/A'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</main>

@@ -62,13 +62,13 @@ export class EditComponent {
       else if(this.property === 'N/A' || this.role === 'N/A'){
         this.property === 'N/A' ? alert('Please select a guest house') : alert('Please select a role');
       }
-      else{
+      else{  
         this.showLoader = true;
         let fd = new FormData();
-        fd.append('first_name', this.first_name);
-        fd.append('last_name', this.last_name);
-        fd.append('contact_number', this.contact);
-        fd.append('username', this.username);
+        fd.append('first_name', data.value.f_name);
+        fd.append('last_name', data.value.l_name);
+        fd.append('contact_number', data.value.c_no);
+        fd.append('username', data.value.u_name);
         fd.append('property', this.property);
         fd.append('group', this.role);
         if(this.editMode){
@@ -76,9 +76,10 @@ export class EditComponent {
           observable = this.userService.update_user(fd)
         }
         else{
-          fd.append('password', this.password);
-          fd.append('password2', this.password2);
-          observable = this.userService.add_user(fd)
+          fd.append('password', data.value.pswd);
+          fd.append('password2', data.value.pswd2);
+          observable = this.userService.add_user(fd);
+          data.reset();
         }
         observable.subscribe({
           next: data => {
@@ -92,7 +93,6 @@ export class EditComponent {
         })
       }
     }
-    data.reset();
   }
   onGoBack(){
     this.editMode ? this.router.navigate(['../../'], {relativeTo: this.route}) : this.router.navigate(['../'], {relativeTo: this.route});
@@ -106,8 +106,8 @@ export class EditComponent {
       let fd = new FormData();
       fd.append('id', this.id.toString());
       fd.append('username', this.username);
-      fd.append('password', data.value.pswd);
-      fd.append('password2', data.value.pswd2);
+      fd.append('password', data.value.chpswd);
+      fd.append('password2', data.value.chpswd2);
       this.userService.change_user_password(fd).subscribe({
         next: data => {
           this.status = 'success';

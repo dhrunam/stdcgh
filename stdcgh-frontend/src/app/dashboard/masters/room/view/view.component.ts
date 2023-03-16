@@ -37,7 +37,8 @@ export class ViewComponent {
     })
   }
   onDeleteRoom(id:number){
-    this.roomService.delete_room(id);
-    this.getRooms();
+    this.roomService.delete_room(id).subscribe({
+      next: () => this.getRooms(),
+    });
   }
 }

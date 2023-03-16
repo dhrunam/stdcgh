@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Subject, tap } from "rxjs";
+import { Subject } from "rxjs";
 import { HttpService } from "src/app/services/http/http.service";
 
 @Injectable({providedIn: 'root'})

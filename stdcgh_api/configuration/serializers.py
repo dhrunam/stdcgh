@@ -210,7 +210,7 @@ class ApplicableTaxDetailsSerializer(serializers.ModelSerializer):
 
 
         today=datetime.date.today()
-        if attrs['lower_limit'] > attrs['uppler_limit']:
+        if attrs['lower_limit'] > attrs['upper_limit']:
             raise serializers.ValidationError(
                 {"lower_limit": "Lower Limit  cannot be greater than Upper Limit."})
 
@@ -237,7 +237,7 @@ class ApplicableTaxDetailsSerializer(serializers.ModelSerializer):
                 {"start_date": "Rate already configured in this date range."})
 
         applicable_tax=models.ApplicableTaxDetails.objects.filter(start_date__lte=attrs['end_date'], 
-            end_date__gte=attrs['end_date']).filter(lower_limit__lte=attrs['uppler_limit'], 
+            end_date__gte=attrs['end_date']).filter(lower_limit__lte=attrs['upper_limit'], 
             upper_limit__gte=attrs['upper_limit'])
         
         if applicable_tax and applicable_tax.count()>0:

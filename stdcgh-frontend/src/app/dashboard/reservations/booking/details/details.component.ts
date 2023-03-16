@@ -14,9 +14,7 @@ export class DetailsComponent {
   roomDetails: any = [];
   constructor(private bookingService: BookingService){}
   ngOnInit(): void {
-    this.showLoader = true;
     this.subscription = this.bookingService.roomDetails.subscribe((d:any) => {
-      this.showLoader = false;
       this.roomDetails = d
     });
   }
@@ -36,27 +34,29 @@ export class DetailsComponent {
       fd.append('checkin_date', this.roomDetails.checkin_date);
       fd.append('checkout_date', this.roomDetails.checkout_date);
       fd.append('rooms', JSON.stringify(this.roomDetails.rooms));
-      this.bookingService.confirm_reservation(fd).subscribe({
-        next: (d:any) => {
-          console.log(d);
-          this.ack.emit({status: true});
-          this.bookingService.acknowledgement.next(
-            {
-              reservation_no: d[0].reservation_no,
-              checkin_date: d[0].checkin_date,
-              checkout_date: d[0].checkout_date,
-              contact_no: d[0].contact_no,
-              guest_name: d[0].lead_guest_name,
-              created_at: d[0].created_at,
-              address: d[0].address,
-              property: d[0].related_property.name,
-              reservation_room_details: d[0].reservation_room_details,
-              totalCost: d[0].total_room_cost,
-              days: this.roomDetails.rooms
-            }
-          );
-        }
-      })
+      this.showLoader = true;
+      setTimeout(() => {
+        this.ack.emit({status: true});
+        this.bookingService.confirm_reservation(fd).subscribe({
+          next: (d:any) => {
+            this.bookingService.acknowledgement.next(
+              {
+                reservation_no: d[0].reservation_no,
+                checkin_date: d[0].checkin_date,
+                checkout_date: d[0].checkout_date,
+                contact_no: d[0].contact_no,
+                guest_name: d[0].lead_guest_name,
+                created_at: d[0].created_at,
+                address: d[0].address,
+                property: d[0].related_property.name,
+                reservation_room_details: d[0].reservation_room_details,
+                totalCost: d[0].total_room_cost,
+                days: this.roomDetails.rooms
+              }
+            );
+          }
+        })
+      }, 500)
     }
   }
   ngOnDestroy(){

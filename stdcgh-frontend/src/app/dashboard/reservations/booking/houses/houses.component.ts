@@ -67,9 +67,13 @@ export class HousesComponent {
       alert('Please select room(s) to continue');
     }
     else{
+      this.showLoader = true;
       this.roomDetails = { property: this.property, checkin_date: this.checkin_date, checkout_date: this.checkout_date, rooms: this.rooms};
       this.bookingService.roomDetails.next(this.roomDetails);
-      this.details.emit({status: true});
+      setTimeout(() => {
+        this.showLoader = false;
+        this.details.emit({status: true});
+      },500)
     }
   }
   ngOnDestroy(){

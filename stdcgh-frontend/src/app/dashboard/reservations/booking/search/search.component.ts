@@ -36,13 +36,8 @@ export class SearchComponent {
         let days:number = this.daysBetween(data.value.start_date, data.value.end_date)
         this.bookingService.search_rooms(data.value.start_date, data.value.end_date, data.value.property_id).subscribe({
           next: d => {
-            if(!d[0]){
-              this.houses.emit({status: false});
-            }
-            else{
-              this.bookingService.results.next({data: d, checkin_date: data.value.start_date, checkout_date: data.value.end_date, property: data.value.property_id, days: days});
-              this.houses.emit({status: true});
-            }
+            this.bookingService.results.next({data: d, checkin_date: data.value.start_date, checkout_date: data.value.end_date, property: data.value.property_id, days: days});
+            this.houses.emit({status: true});
           }
         })
       } 

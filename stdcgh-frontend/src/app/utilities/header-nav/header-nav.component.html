@@ -13,64 +13,82 @@
     <hr>
     <div class="offcanvas-body">
       <ul>
-        <li>
+        <li routerLink="/dashboard/home" routerLinkActive="active">
           <div class="items">
             <i class="bi bi-pc-display-horizontal"></i>
             <label class="ms-4">Dashboard</label>
           </div>
         </li>
-        <li>
+        <li *ngIf="role === 1" routerLink="/dashboard/masters/property" routerLinkActive="active">
           <div class="items">
-            <i class="bi bi-house-add"></i>
-            <label class="ms-4">Book Room</label>
+            <i class="bi bi-buildings"></i>
+            <label class="ms-4">Property Master</label>
           </div>
         </li>
-        <li>
+        <li *ngIf="role === 1" routerLink="/dashboard/masters/category" routerLinkActive="active">
           <div class="items">
-            <i class="bi bi-puzzle"></i>
-            <label class="ms-4">Extension</label>
+            <i class="bi bi-bookmark-star"></i>
+            <label class="ms-4">Category Master</label>
           </div>
         </li>
-        <li>
+        <li *ngIf="role === 1" routerLink="/dashboard/masters/room" routerLinkActive="active">
+          <div class="items">
+            <i class="bi bi-map"></i>
+            <label class="ms-4">Room Master</label>
+          </div>
+        </li>
+        <li *ngIf="role === 1" routerLink="/dashboard/masters/users" routerLinkActive="active">
+          <div class="items">
+            <i class="bi bi-person"></i>
+            <label class="ms-4">User Master</label>
+          </div>
+        </li>
+        <li *ngIf="role === 1" routerLink="/dashboard/configurations/tariff" routerLinkActive="active">
+          <div class="items">
+            <i class="bi bi-currency-rupee"></i>
+            <label class="ms-4">Room Tariff</label>
+          </div>
+        </li>
+        <li *ngIf="role === 1" routerLink="/dashboard/configurations/tax" routerLinkActive="active">
+          <div class="items">
+            <i class="bi bi-file-earmark-spreadsheet"></i>
+            <label class="ms-4">Taxes</label>
+          </div>
+        </li>
+        <li *ngIf="role === 2" routerLink="/dashboard/reservations/booking" routerLinkActive="active">
+          <div class="items">
+            <i class="bi bi-pencil-square"></i>
+            <label class="ms-4">Booking</label>
+          </div>
+        </li>
+        <li *ngIf="role === 2" routerLink="/dashboard/reservations/cancel" routerLinkActive="active">
           <div class="items">
             <i class="bi bi-x-circle"></i>
             <label class="ms-4">Cancel</label>
           </div>
         </li>
-        <li>
+        <li *ngIf="role === 3" routerLink="/dashboard/reservations/checkin" routerLinkActive="active">
           <div class="items">
-            <i class="bi bi-pencil-square"></i>
-            <label class="ms-4">Modify</label>
+            <i class="bi bi-clipboard-plus"></i>
+            <label class="ms-4">Checkin</label>
           </div>
         </li>
-        <li>
+        <li *ngIf="role === 3" routerLink="/dashboard/reservations/checkout" routerLinkActive="active">
           <div class="items">
-            <i class="bi bi-r-circle"></i>
-            <label class="ms-4">Register</label>
+            <i class="bi bi-clipboard-minus"></i>
+            <label class="ms-4">Checkout</label>
           </div>
         </li>
-        <li>
+        <li *ngIf="role === 3" routerLink="/dashboard/reservations/miscellaneous" routerLinkActive="active">
           <div class="items">
-            <i class="bi bi-bar-chart"></i>
-            <label class="ms-4">Occupancy Chart</label>
+            <i class="bi bi-clipboard-data"></i>
+            <label class="ms-4">Miscellaneous</label>
           </div>
         </li>
-        <li>
+        <li *ngIf="role === 3" routerLink="/dashboard/reservations/billing" routerLinkActive="active">
           <div class="items">
-            <i class="bi bi-check2-square"></i>
-            <label class="ms-4">Allotment</label>
-          </div>
-        </li>
-        <li>
-          <div class="items">
-            <i class="bi bi-hourglass-bottom"></i>
-            <label class="ms-4">Availability</label>
-          </div>
-        </li>
-        <li>
-          <div class="items">
-            <i class="bi bi-gear-wide-connected"></i>
-            <label class="ms-4">Backup DB</label>
+            <i class="bi bi-clipboard2-check"></i>
+            <label class="ms-4">Billing</label>
           </div>
         </li>
       </ul>
