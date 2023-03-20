@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { AuthService } from '../services/auth-service/auth.service';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class LoginComponent {
   error = null;
-  constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute){}
+  constructor(private authService: AuthService){}
   login(data:NgForm){
     if(!data.valid){
       data.control.markAllAsTouched();
@@ -26,7 +25,7 @@ export class LoginComponent {
       fd.append('client', 'web');
       this.authService.onLogin(fd).subscribe({
         next: data => {
-          this.router.navigate(['/dashboard'], { relativeTo: this.route } );
+          window.location.href = '/dashboard';
         },
         error: err => { this.error = err; console.log(err) },
       });

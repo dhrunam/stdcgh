@@ -14,6 +14,8 @@ export class HeaderComponent {
     this.name = this.localStorageService.getUsername();
   }
   onLogout(){
-    this.authService.onLogout().subscribe(() => window.location.href = '/');
+    this.authService.onLogout().subscribe({
+      next: () => window.location.href = '/login',
+    });
   }
 }

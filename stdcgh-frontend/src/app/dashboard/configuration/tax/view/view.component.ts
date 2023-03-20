@@ -25,9 +25,8 @@ export class ViewComponent {
     let fd = new FormData();
     fd.append('is_applicable', is_applicable.toString());
     fd.append('id', id.toString());
-    this.showLoader = true;
     this.taxService.updateTax(fd).subscribe({
-      next: () => this.getTaxes,
+      next: () => this.getTaxes(),
     })
   }
   getTaxes(){

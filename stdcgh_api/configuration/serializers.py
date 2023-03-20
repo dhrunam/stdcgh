@@ -208,55 +208,56 @@ class ApplicableTaxDetailsSerializer(serializers.ModelSerializer):
     
     def validate(self, attrs):
 
-
+        
         today=datetime.date.today()
-        if attrs['lower_limit'] > attrs['upper_limit']:
-            raise serializers.ValidationError(
-                {"lower_limit": "Lower Limit  cannot be greater than Upper Limit."})
+        if 'upper_limit' in attrs and 'lower_limit' in attrs:
+            if attrs['lower_limit'] > attrs['upper_limit']:
+                raise serializers.ValidationError(
+                    {"lower_limit": "Lower Limit  cannot be greater than Upper Limit."})
+        if 'start_date' in attrs and 'end_date' in attrs:
+            if attrs['start_date'] > attrs['end_date']:
+                raise serializers.ValidationError(
+                    {"start_date": "Start date  cannot be greater than End date."})
+        if 'start_date' in attrs:
+            if attrs['start_date'] < today:
+                raise serializers.ValidationError(
+                    {"start_date": "Start date  cannot be less than today's date."})
+        if 'end_date' in attrs:
+            if attrs['end_date'] < today:
+                raise serializers.ValidationError(
+                    {"end_date": "End date  cannot be less than today's date."})
+        if 'upper_limit' in attrs and 'lower_limit' in attrs and 'start_date' in attrs and 'end_date' in attrs:
+            applicable_tax=models.ApplicableTaxDetails.objects.filter(start_date__lte=attrs['start_date'],
+                end_date__gte=attrs['start_date']).filter(lower_limit__lte=attrs['lower_limit'],
+                upper_limit__gte=attrs['lower_limit'])
 
-        if attrs['start_date'] > attrs['end_date']:
-            raise serializers.ValidationError(
-                {"start_date": "Start date  cannot be greater than End date."})
+            
+            if applicable_tax and applicable_tax.count()>0:
 
-        if attrs['start_date'] < today:
-            raise serializers.ValidationError(
-                {"start_date": "Start date  cannot be less than today's date."})
+                raise serializers.ValidationError(
+                    {"start_date": "Rate already configured in this date range."})
 
-        if attrs['end_date'] < today:
-            raise serializers.ValidationError(
-                {"end_date": "End date  cannot be less than today's date."})
+            applicable_tax=models.ApplicableTaxDetails.objects.filter(start_date__lte=attrs['end_date'], 
+                end_date__gte=attrs['end_date']).filter(lower_limit__lte=attrs['upper_limit'], 
+                upper_limit__gte=attrs['upper_limit'])
+            
+            if applicable_tax and applicable_tax.count()>0:
 
-        applicable_tax=models.ApplicableTaxDetails.objects.filter(start_date__lte=attrs['start_date'],
-            end_date__gte=attrs['start_date']).filter(lower_limit__lte=attrs['lower_limit'],
-            upper_limit__gte=attrs['lower_limit'])
+                raise serializers.ValidationError(
+                    {"end_date": "Rate already configured in this date range."})
 
-        
-        if applicable_tax and applicable_tax.count()>0:
+            applicable_tax=models.ApplicableTaxDetails.objects.filter( start_date__gte=attrs['start_date'],
+                end_date__lte=attrs['end_date']).filter(lower_limit__gte=attrs['lower_limit'],
+                upper_limit__lte=attrs['upper_limit'])
+            
+            if applicable_tax and applicable_tax.count()>0:
 
-            raise serializers.ValidationError(
-                {"start_date": "Rate already configured in this date range."})
-
-        applicable_tax=models.ApplicableTaxDetails.objects.filter(start_date__lte=attrs['end_date'], 
-            end_date__gte=attrs['end_date']).filter(lower_limit__lte=attrs['upper_limit'], 
-            upper_limit__gte=attrs['upper_limit'])
-        
-        if applicable_tax and applicable_tax.count()>0:
-
-            raise serializers.ValidationError(
-                {"end_date": "Rate already configured in this date range."})
-
-        applicable_tax=models.ApplicableTaxDetails.objects.filter( start_date__gte=attrs['start_date'],
-            end_date__lte=attrs['end_date']).filter(lower_limit__gte=attrs['lower_limit'],
-            upper_limit__lte=attrs['upper_limit'])
-        
-        if applicable_tax and applicable_tax.count()>0:
-
-            raise serializers.ValidationError(
-                {
-                    "start_date": "Rate already configured in this date range.",
-                    "end_date": "Rate already configured in this date range."
-                    
-                })
+                raise serializers.ValidationError(
+                    {
+                        "start_date": "Rate already configured in this date range.",
+                        "end_date": "Rate already configured in this date range."
+                        
+                    })
 
         
 
